@@ -1,0 +1,53 @@
+#include <stdio.h>
+iterative
+int main() {
+    // Maksimum jumlah elemen dalam himpunan
+    int max_elemen = 100;
+
+    // Inisialisasi array untuk menyimpan himpunan A dan B
+    int A[max_elemen], B[max_elemen], irisan[max_elemen];
+
+    // Input himpunan A dari user
+    printf("Masukkan elemen-elemen himpunan A (pisahkan dengan spasi, akhiri dengan -1): ");
+    int elemen, index_A = 0;
+    for (index_A = 0; ; index_A++) {
+        scanf("%d", &elemen);
+        if (elemen == -1) {
+            break;
+        }
+        A[index_A] = elemen;
+    }
+
+    // Input himpunan B dari user
+    printf("Masukkan elemen-elemen himpunan B (pisahkan dengan spasi, akhiri dengan -1): ");
+    int index_B = 0;
+    for (index_B = 0; ; index_B++) {
+        scanf("%d", &elemen);
+        if (elemen == -1) {
+            break;
+        }
+        B[index_B] = elemen;
+    }
+
+    // Inisialisasi indeks untuk irisan
+    int index_irisan = 0;
+
+    // Loop melalui setiap elemen himpunan A
+    for (int i = 0; i < index_A; i++) {
+        // Periksa apakah elemen ada di himpunan B
+        for (int j = 0; j < index_B; j++) {
+            if (A[i] == B[j]) {
+                irisan[index_irisan++] = A[i];
+                break;
+            }
+        }
+    }
+
+    // Tampilkan hasil
+    printf("Irisan dari himpunan A dan B adalah: ");
+    for (int i = 0; i < index_irisan; i++) {
+        printf("%d ", irisan[i]);
+    }
+
+    return 0;
+} 
