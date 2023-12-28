@@ -1,0 +1,48 @@
+#include <stdio.h>
+
+int main() {
+    // Maksimum jumlah elemen dalam himpunan
+    int max_elemen = 100;
+
+    // Inisialisasi array untuk menyimpan himpunan A dan B
+    int A[max_elemen], B[max_elemen], irisan[max_elemen];
+
+    // Input himpunan A dari user
+    printf("Masukkan elemen-elemen himpunan A (pisahkan dengan spasi, akhiri dengan -1): ");
+    int elemen, index_A = 0;
+    for (index_A = 0; ; index_A++) {
+        scanf("%d", &elemen);
+        if (elemen == -1) {
+            break;
+        }
+        A[index_A] = elemen;
+    }
+
+    // Input himpunan B dari user
+    printf("Masukkan elemen-elemen himpunan B (pisahkan dengan spasi, akhiri dengan -1): ");
+    int index_B = 0;
+    for (index_B = 0; ; index_B++) {
+        scanf("%d", &elemen);
+        if (elemen == -1) {
+            break;
+        }
+        B[index_B] = elemen;
+    }
+
+    // Inisialisasi array boolean untuk merepresentasikan keanggotaan elemen dalam himpunan A dan B
+    int set_A[max_elemen] = {0};
+    int set_B[max_elemen] = {0};
+
+    // Membangun set A
+    for (int i = 0; i < index_A; i++) {
+        set_A[A[i]] = 1;
+    }
+
+    // Membangun set B dan mencari irisan
+    int index_irisan = 0;
+    for (int i = 0; i < index_B; i++) {
+        if (set_A[B[i]]) {
+            irisan[index_irisan++] = B[i];
+        }
+    }
+
