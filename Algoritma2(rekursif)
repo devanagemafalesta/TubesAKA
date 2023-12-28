@@ -1,14 +1,28 @@
 #include <stdio.h>
 
+// Recursive function to find intersection
+void findIntersection(int A[], int B[], int irisan[], int index_A, int index_B, int i, int j, int &index_irisan) {
+    if (i == index_A) {
+        return;
+    } else if (j == index_B) {
+        findIntersection(A, B, irisan, index_A, index_B, i + 1, 0, index_irisan);
+    } else {
+        if (A[i] == B[j]) {
+            irisan[index_irisan++] = A[i];
+        }
+        findIntersection(A, B, irisan, index_A, index_B, i, j + 1, index_irisan);
+    }
+}
+
 int main() {
-    // Maksimum jumlah elemen dalam himpunan
+    // Maximum number of elements in the set
     int max_elemen = 100;
 
-    // Inisialisasi array untuk menyimpan himpunan A dan B
+    // Initialize arrays to store sets A and B
     int A[max_elemen], B[max_elemen], irisan[max_elemen];
 
-    // Input himpunan A dari user
-    printf("Masukkan elemen-elemen himpunan A (pisahkan dengan spasi, akhiri dengan -1): ");
+    // Input set A from user
+    printf("Enter the elements of set A (separate with space, end with -1): ");
     int elemen, index_A = 0;
     for (index_A = 0; ; index_A++) {
         scanf("%d", &elemen);
@@ -18,8 +32,8 @@ int main() {
         A[index_A] = elemen;
     }
 
-    // Input himpunan B dari user
-    printf("Masukkan elemen-elemen himpunan B (pisahkan dengan spasi, akhiri dengan -1): ");
+    // Input set B from user
+    printf("Enter the elements of set B (separate with space, end with -1): ");
     int index_B = 0;
     for (index_B = 0; ; index_B++) {
         scanf("%d", &elemen);
@@ -29,20 +43,17 @@ int main() {
         B[index_B] = elemen;
     }
 
-    // Inisialisasi array boolean untuk merepresentasikan keanggotaan elemen dalam himpunan A dan B
-    int set_A[max_elemen] = {0};
-    int set_B[max_elemen] = {0};
-
-    // Membangun set A
-    for (int i = 0; i < index_A; i++) {
-        set_A[A[i]] = 1;
-    }
-
-    // Membangun set B dan mencari irisan
+    // Initialize index for intersection
     int index_irisan = 0;
-    for (int i = 0; i < index_B; i++) {
-        if (set_A[B[i]]) {
-            irisan[index_irisan++] = B[i];
-        }
+
+    // Call recursive function to find intersection
+    findIntersection(A, B, irisan, index_A, index_B, 0, 0, index_irisan);
+
+    // Display the result
+    printf("The intersection of sets A and B is: ");
+    for (int i = 0; i < index_irisan; i++) {
+        printf("%d ", irisan[i]);
     }
 
+    return 0;
+}
