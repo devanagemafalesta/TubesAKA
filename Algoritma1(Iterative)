@@ -1,5 +1,5 @@
 #include <stdio.h>
-iterative
+
 int main() {
     // Maksimum jumlah elemen dalam himpunan
     int max_elemen = 100;
