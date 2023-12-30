@@ -1,7 +1,9 @@
 #include <stdio.h>
+#include <time.h>
 
 int main() {
-    // Maksimum jumlah elemen dalam himpunan
+    clock_t start_time, end_time;
+    
     int max_elemen = 100;
 
     // Inisialisasi array untuk menyimpan himpunan A dan B
@@ -17,7 +19,7 @@ int main() {
         }
         A[index_A] = elemen;
     }
-
+    
     // Input himpunan B dari user
     printf("Masukkan elemen-elemen himpunan B (pisahkan dengan spasi, akhiri dengan -1): ");
     int index_B = 0;
@@ -28,11 +30,10 @@ int main() {
         }
         B[index_B] = elemen;
     }
-
-    // Inisialisasi indeks untuk irisan
+    
     int index_irisan = 0;
-
-    // Loop melalui setiap elemen himpunan A
+    
+    start_time = clock();
     for (int i = 0; i < index_A; i++) {
         // Periksa apakah elemen ada di himpunan B
         for (int j = 0; j < index_B; j++) {
@@ -42,12 +43,15 @@ int main() {
             }
         }
     }
+    end_time = clock();
 
-    // Tampilkan hasil
+    double execution_time = ((double) (end_time - start_time)) / CLOCKS_PER_SEC;
+    printf("Execution time: %f seconds\n", execution_time);
+    
     printf("Irisan dari himpunan A dan B adalah: ");
     for (int i = 0; i < index_irisan; i++) {
         printf("%d ", irisan[i]);
     }
 
     return 0;
-} 
+}
